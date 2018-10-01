@@ -7,6 +7,15 @@
     <%= submit_tag("Search") %>
 <% end %>
 
+<script>
+var QueryURL = "http://localhost:3000/sections/search.json?query=";
+var ResultsDiv = "results";
+var Field = "number";
+var QueryTag = "query";
+</script>
+
+<script type="text/javascript" src="/javascripts/AJAXSearch.js"></script>
+<br/><div id="results"></div>
 
 <h1>Sections</h1>
 
@@ -24,9 +33,9 @@
   <tbody>
     <% @sections.each do |section| %>
       <tr>
-        <td><%= section.course.name %></td>
         <td><%= section.semester %></td>
         <td><%= section.number %></td>
+        <td><%= section.course.name %></td>
         <td><%= section.room_number %></td>
         <td><%= link_to 'Show', section %></td>
         <td><%= link_to 'Edit', edit_section_path(section) %></td>

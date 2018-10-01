@@ -7,6 +7,16 @@
     <%= submit_tag("Search") %>
 <% end %>
 
+<script>
+var QueryURL = "http://localhost:3000/students/search.json?query=";
+var ResultsDiv = "results";
+var Field = "name";
+var QueryTag = "query";
+</script>
+
+<script type="text/javascript" src="/javascripts/AJAXSearch.js"></script>
+<br/><div id="results"></div>
+
 
 <h1>Students</h1>
 
@@ -14,7 +24,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Student</th>
+      <th>Student Number</th>
       <th colspan="3"></th>
     </tr>
   </thead>

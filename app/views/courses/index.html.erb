@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <h2>Search Courses</h2>
@@ -6,6 +7,19 @@
     <%= text_field_tag(:query) %>
     <%= submit_tag("Search") %>
 <% end %>
+
+<script>
+var QueryURL = "http://localhost:3000/courses/search.json?query=";
+var ResultsDiv = "results";
+var Field = "name";
+var QueryTag = "query";
+</script>
+
+<script type="text/javascript" src="/javascripts/AJAXSearch.js"></script>
+<br/><div id="results"></div>
+
+
+
 
 
 <h1>Courses</h1>
