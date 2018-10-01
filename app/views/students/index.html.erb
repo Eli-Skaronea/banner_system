@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+<h2>Search Students</h2>
+<%= form_tag(search_students_url, method: "get") do %>
+    <%= label_tag(:query, "Search for a student:") %>
+    <%= text_field_tag(:query) %>
+    <%= submit_tag("Search") %>
+<% end %>
+
+
 <h1>Students</h1>
 
 <table>
@@ -27,3 +35,7 @@
 <br>
 
 <%= link_to 'New Student', new_student_path %>
+
+<%= link_to 'Log out',   
+  destroy_user_session_path,
+  method: :delete %>

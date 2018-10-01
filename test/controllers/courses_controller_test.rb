@@ -5,6 +5,19 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     @course = courses(:one)
   end
 
+  test "shouldn't find missing section number" do 
+    assert Course.where("name like ?", "Calculus 6").length == 0
+  end
+
+  test "should find section from the fixture" do
+    assert Course.where("name like ?", "MyString").length == 2
+  end
+
+  test "searches always return 200" do
+    get search_courses_url, params: { search: "Calculus 6" }
+    assert_equal 200, status
+  end
+
   test "should get index" do
     get courses_url
     assert_response :success
