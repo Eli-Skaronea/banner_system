@@ -13,10 +13,10 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert Student.where("name like ?", "MyString").length == 2
   end
 
-  test "searches always return 200" do
-    get search_students_url, params: { search: "Bob" }
-    assert_equal 200, status
-  end
+  #test "searches always return 200" do
+  #  get search_students_url, params: { search: "Bob" }
+  #  assert_equal 200, status
+  #end
 
   test "should get index" do
     get students_url

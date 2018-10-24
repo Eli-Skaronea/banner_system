@@ -11,6 +11,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    @sections = Section.all
   end
 
   # GET /students/new
@@ -28,6 +29,7 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(student_params)
+    @sections = Section.all
 
     respond_to do |format|
       if @student.save
