@@ -13,4 +13,8 @@
  *= require_tree .
  *= require_self
  */
-
+.nav-bar{
+    width: 100%;
+    text-align: center;
+    background-color: beige;
+}
