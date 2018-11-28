@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>Banner System SPA in Vue and Axios</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="Itemlist">
+        <button v-on:click="doajax('sections')">sections</button>
+        <button v-on:click="doajax('sections')">Show More</button>
+        <ul>
+            <div v-for="item in items">
+                <li>{{item.number}} 
+                    <!-- <button v-on:click="doajax('sections/item.id')">Show More</button> -->
+                    <ul>
+                        <li>
+                            <p>Room Number: </p>{{detail.room_number}}
+                            <p>Semester: </p>{{detail.semester}}
+                        </li>
+                    </ul>
+                </li>
+            </div>
+        </ul>
+        <button v-on:click="doajax('students')">students</button>
+        <ul>
+            <div v-for="item in items">
+                <li>{{item.name}}</li>
+            </div>
+        </ul>
+        <button v-on:click="doajax('courses')">courses</button>
+        <ul>
+            <div v-for="item in items">
+                <li>{{item.name}}</li>
+            </div>
+        </ul>
+    </div>
+
+    
+    <script type="text/javascript">
+        var ItemVue = new Vue({
+            el: '#Itemlist',
+            data: { items: [] },
+            methods: {
+                doajax: function (input) {
+                    axios.get('http://localhost:3000/' + input + '.json')
+                        .then(response => { this.items = response.data })
+                        .catch(error => { console.log(error); });
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
