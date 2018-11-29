@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <title>Banner System SPA in Vue and Axios</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="Sectionlist">
+        <button v-on:click="doajax('sections')">Sections</button>
+        <span v-show="button">
+            <button v-on:click="more = !more">Expand Section Info</button>
+        </span>
+        <ol>
+            <div v-for="item in items">
+                <li>
+                    <p><b>Section Number:</b> {{item.number}}</p>
+                    <ul v-show="more">
+                        <li>
+                            <p><b>Semester: </b>{{item.semester}}</p>
+                            <p><b>Room Number: </b>{{item.room_number}}</p>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+        </ol>
+    </div>
+    <div id="Courselist">
+        <button v-on:click="doajax('courses')">Courses</button>
+        <span v-show="button">
+            <button v-on:click="more = !more">Expand Course Info</button>
+        </span>
+        <ul>
+            <div v-for="item in items">
+                <li><p><b>Course Name: </b>{{item.name}}</p></li>
+                <ul v-show="more">
+                    <li>
+                        <p><b>Course Number: </b>{{item.number}}</p>
+                        <p><b>Credit Hours: </b>{{item.credit_hour}}</p>
+                        <p><b>Department: </b>{{item.department}}</p>
+                    </li>
+                </ul>
+            </div>
+        </ul>
+    </div>
+    
+
+
+    <script type="text/javascript">
+        var SectionVue = new Vue({
+            el: '#Sectionlist',
+            data: { items: [], more: false, button: false },
+            methods: {
+                doajax: function (input) {
+                    if(this.items === undefined || this.items.length == 0){
+                        this.button = !this.button
+                        axios.get('http://localhost:3000/' + input + '.json')
+                            .then(response => { this.items = response.data })
+                            .catch(error => { console.log(error); });
+                    }
+                    else{
+                        this.items = []
+                        this.button = false
+                    }
+                    
+                },
+            }
+        });
+        var CourseVue = new Vue({
+            el: '#Courselist',
+            data: { items: [], more: false, button: false },
+            methods: {
+                doajax: function (input) {
+                    if (this.items === undefined || this.items.length == 0) {
+                    this.button = !this.button
+                    axios.get('http://localhost:3000/' + input + '.json')
+                        .then(response => { this.items = response.data })
+                        .catch(error => { console.log(error); });
+                    }
+                    else{
+                        this.items = []
+                        this.button = false
+                    }
+                }
+            },
+        })
+        var StudentVue = new Vue({
+                el: '#Studentlist',
+                data: { items: [], more: false },
+                methods: {
+                    doajax: function (input) {
+                        axios.get('http://localhost:3000/' + input + '.json')
+                            .then(response => { this.items = response.data })
+                            .catch(error => { console.log(error); });
+                    },
+                }
+            })
+    </script>
+    
+</body>
+
+</html>
